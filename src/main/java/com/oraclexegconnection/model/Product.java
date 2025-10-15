@@ -1,45 +1,39 @@
 package com.oraclexegconnection.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.relational.core.mapping.Column;
+import lombok.ToString;
 
-import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "PRODUCT")
+@Table("PRODUCT")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString(exclude = "createdAt", includeFieldNames = true)
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PRODUCT_ID")
+    @Column("PRODUCT_ID")
     private Long productId;
 
-    @Column(name = "NAME", nullable = false, length = 100)
+    @Column("NAME")
     private String name;
 
-    @Column(name = "DESCRIPTION", length = 255)
+    @Column("DESCRIPTION")
     private String description;
 
-    @Column(name = "PRICE", nullable = false, precision = 10, scale = 2)
+    @Column("PRICE")
     private BigDecimal price;
 
-    @Column(name = "CREATED_AT", insertable = false, updatable = false)
+    @Column("CREATED_AT")
     private LocalDateTime createdAt;
 
-    public Product() {}
-
-    public Long getProductId() { return productId; }
-    public void setProductId(Long productId) { this.productId = productId; }
-
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
-
-    public BigDecimal getPrice() { return price; }
-    public void setPrice(BigDecimal price) { this.price = price; }
-
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }
